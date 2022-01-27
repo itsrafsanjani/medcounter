@@ -1,0 +1,14 @@
+{
+    "name": "itsrafsanjani/medcounter",
+    "description": "Medicine Price and Quantity Counter",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "itsrafsanjani",
+            "email": "mdrafsanjanirafin@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
