@@ -16,12 +16,6 @@ class MedicineController
         return self::$instance;
     }
 
-    public function response($data = [])
-    {
-        $data['message'] = 'Data saved successfully';
-        echo json_encode($data);
-    }
-
     public function index()
     {
         $medicine = new Medicine();
@@ -33,16 +27,29 @@ class MedicineController
         ]);
     }
 
+    public function response($data = [], $status = 200)
+    {
+        if ($status == 200) {
+            $data['message'] = 'Success!';
+        } else if ($status == 201) {
+            $data['message'] = 'Data saved successfully!';
+        } else if ($status == 400) {
+            $data['message'] = 'Validation error!';
+        }
+        http_response_code($status);
+        echo json_encode($data);
+    }
+
     public function store()
     {
         $medicine = new Medicine();
 
         $medicine->save([
-            'name' => 'Test',
-            'price' => 100,
-            'quantity' => 5
+            'name' => $_POST['name'],
+            'price' => $_POST['price'],
+            'quantity' => $_POST['quantity']
         ]);
 
-        $this->response();
+        $this->response([], 201);
     }
 }

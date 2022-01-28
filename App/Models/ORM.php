@@ -28,19 +28,19 @@ class ORM
         $arr_exception = ['NOW()', 'CURDATE()'];
 
         $query = "INSERT INTO `" . $this->tableName . "` (";
-        $ctr = 0;
+        $counter = 0;
         foreach ($data as $key => $value) {
-            if ($ctr < (count($data) - 1)) {
+            if ($counter < (count($data) - 1)) {
                 $query .= "`" . $key . "`, ";
             } else {
                 $query .= "`" . $key . "`) ";
             }
-            $ctr++;
+            $counter++;
         }
         $query .= "VALUES (";
-        $ctr = 0;
+        $counter = 0;
         foreach ($data as $value) {
-            if ($ctr < (count($data) - 1)) {
+            if ($counter < (count($data) - 1)) {
                 if (in_array(strtoupper($value), $arr_exception)) {
                     $query .= $value . ", ";
                 } else {
@@ -53,7 +53,7 @@ class ORM
                     $query .= "'" . $this->escapeString($value) . "')";
                 }
             }
-            $ctr++;
+            $counter++;
         }
 
         return $this->db->query($query);
