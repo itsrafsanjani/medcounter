@@ -16,8 +16,9 @@ class MedicineController
         return self::$instance;
     }
 
-    public function response($data)
+    public function response($data = [])
     {
+        $data['message'] = 'Data saved successfully';
         echo json_encode($data);
     }
 
@@ -30,5 +31,18 @@ class MedicineController
             'message' => 'Medicines retrieved successfully',
             'data' => $medicines
         ]);
+    }
+
+    public function store()
+    {
+        $medicine = new Medicine();
+
+        $medicine->save([
+            'name' => 'Test',
+            'price' => 100,
+            'quantity' => 5
+        ]);
+
+        $this->response();
     }
 }
