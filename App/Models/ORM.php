@@ -58,4 +58,9 @@ class ORM
 
         return $this->db->query($query);
     }
+
+    public function delete($id)
+    {
+        return $this->db->query('DELETE FROM ' . $this->tableName . ' WHERE id = ' . $id);
+    }
 }

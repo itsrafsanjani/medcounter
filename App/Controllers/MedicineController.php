@@ -52,4 +52,15 @@ class MedicineController
 
         $this->response([], 201);
     }
+
+    public function destroy($id)
+    {
+        $medicine = new Medicine();
+
+        $medicine->delete($id);
+
+        $this->response([
+            'message' => 'Successfully deleted!'
+        ], 200);
+    }
 }

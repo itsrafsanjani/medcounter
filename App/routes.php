@@ -34,8 +34,8 @@ Route::delete('/verb', function () {
 });
 
 Route::get('/medicines', [MedicineController::class, 'index']);
-Route::get('/medicines2', 'MedicineController@index');
-Route::post('/medicines', 'MedicineController@store');
+Route::post('/medicines', [MedicineController::class, 'store']);
+Route::delete('/medicines/(\w+)', [MedicineController::class, 'destroy']);
 
 //Route::get('/hello/world', 'HelloController@sayHelloWorld');
 
