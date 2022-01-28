@@ -2,9 +2,12 @@
 
 namespace App\Controllers;
 
+use App\DB;
+
 class PostController
 {
     private static $instance;
+    public $tableName = "posts";
 
     static function getInstance()
     {
@@ -16,22 +19,13 @@ class PostController
 
     public function index()
     {
+        $db = DB::getInstance();
+        $qry = $db->query('SELECT * FROM ' . $this->tableName);
+        $posts = $qry->fetch_all(MYSQLI_ASSOC);
+
         echo json_encode([
             'message' => 'Posts retrieved successfully',
-            'data' => [
-                [
-                    'title' => 'Hello World',
-                    'description' => 'Test Post Description'
-                ],
-                [
-                    'title' => 'Hello World',
-                    'description' => 'Test Post Description'
-                ],
-                [
-                    'title' => 'Hello World',
-                    'description' => 'Test Post Description'
-                ],
-            ]
+            'data' => $posts
         ]);
     }
 
