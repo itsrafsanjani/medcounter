@@ -5,6 +5,7 @@ namespace App\Route;
 class Route
 {
     private static $noMatch = true;
+    private static $namespace = 'App\Controllers\\';
 
     static function get($pattern, $callback)
     {
@@ -32,7 +33,7 @@ class Route
                 }
             } else {
                 $parts = explode('@', $callback);
-                $className = $parts[0];
+                $className = self::$namespace . $parts[0];
                 $methodName = $parts[1];
                 $instance = $className::getInstance();
                 $instance->$methodName(...$functionArguments);

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Controllers\PostController;
+use App\Controllers\MedicineController;
 use App\Route\Route;
 
 Route::get('/', function () {
@@ -33,8 +33,8 @@ Route::delete('/verb', function () {
     echo $_SERVER['REQUEST_METHOD'];
 });
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts2', 'PostController@index');
+Route::get('/medicines', [MedicineController::class, 'index']);
+Route::get('/medicines2', 'MedicineController@index');
 
 //Route::get('/hello/world', 'HelloController@sayHelloWorld');
 
