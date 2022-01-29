@@ -53,6 +53,17 @@ class MedicineController
         $this->response([], 201);
     }
 
+    public function show($id)
+    {
+        $medicine = new Medicine();
+
+        $medicine = $medicine->show($id);
+
+        $this->response([
+            'data' => $medicine
+        ]);
+    }
+
     public function destroy($id)
     {
         $medicine = new Medicine();
@@ -61,6 +72,6 @@ class MedicineController
 
         $this->response([
             'message' => 'Successfully deleted!'
-        ], 200);
+        ]);
     }
 }

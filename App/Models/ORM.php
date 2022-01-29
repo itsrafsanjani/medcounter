@@ -59,6 +59,11 @@ class ORM
         return $this->db->query($query);
     }
 
+    public function show($id)
+    {
+        return $this->db->query('SELECT * FROM ' . $this->tableName . ' WHERE id = ' . $id)->fetch_assoc();
+    }
+
     public function delete($id)
     {
         return $this->db->query('DELETE FROM ' . $this->tableName . ' WHERE id = ' . $id);
