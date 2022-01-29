@@ -24,10 +24,10 @@ class MedicineController
         $this->response([
             'message' => 'Medicines retrieved successfully',
             'data' => $medicines
-        ]);
+        ], 200);
     }
 
-    public function response($data = [], $status = 200)
+    public function response($data = [], $status = 400)
     {
         if ($status == 200) {
             $data['message'] = 'Success!';
@@ -61,7 +61,20 @@ class MedicineController
 
         $this->response([
             'data' => $medicine
-        ]);
+        ], 200);
+    }
+
+    public function update($id)
+    {
+        $medicine = new Medicine();
+
+        $medicine->update([
+            'name' => $_POST['name'],
+            'price' => $_POST['price'],
+            'quantity' => $_POST['quantity']
+        ], $id);
+
+        $this->response([], 200);
     }
 
     public function destroy($id)
@@ -72,6 +85,6 @@ class MedicineController
 
         $this->response([
             'message' => 'Successfully deleted!'
-        ]);
+        ], 200);
     }
 }

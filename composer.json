@@ -17,6 +17,7 @@
     "minimum-stability": "dev",
     "require": {
       "ext-mysqli": "*",
-      "ext-json": "*"
+      "ext-json": "*",
+      "ext-mbstring": "*"
     }
 }

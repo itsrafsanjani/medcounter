@@ -63,6 +63,23 @@ class Route
         self::process($pattern, $callback);
     }
 
+    static function put($pattern, $callback)
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'PUT') {
+            return;
+        }
+        parse_str(file_get_contents('php://input'), $_PUT);
+        self::process($pattern, $callback);
+    }
+
+    static function patch($pattern, $callback)
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'PATCH') {
+            return;
+        }
+        self::process($pattern, $callback);
+    }
+
     static function delete($pattern, $callback)
     {
         if ($_SERVER['REQUEST_METHOD'] != 'DELETE') {
