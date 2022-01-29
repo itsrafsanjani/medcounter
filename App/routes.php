@@ -39,6 +39,4 @@ Route::get('/medicines/(\w+)/show', [MedicineController::class, 'show']);
 Route::delete('/medicines/(\w+)', [MedicineController::class, 'destroy']);
 Route::post('/medicines/(\w+)', [MedicineController::class, 'update']);
 
-//Route::get('/hello/world', 'HelloController@sayHelloWorld');
-
 Route::cleanup();

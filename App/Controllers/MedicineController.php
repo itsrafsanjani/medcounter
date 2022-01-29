@@ -16,17 +16,6 @@ class MedicineController
         return self::$instance;
     }
 
-    public function index()
-    {
-        $medicine = new Medicine();
-        $medicines = $medicine->all();
-
-        $this->response([
-            'message' => 'Medicines retrieved successfully',
-            'data' => $medicines
-        ], 200);
-    }
-
     public function response($data = [], $status = 400)
     {
         if ($status == 200) {
@@ -38,6 +27,17 @@ class MedicineController
         }
         http_response_code($status);
         echo json_encode($data);
+    }
+
+    public function index()
+    {
+        $medicine = new Medicine();
+        $medicines = $medicine->all();
+
+        $this->response([
+            'message' => 'Medicines retrieved successfully',
+            'data' => $medicines
+        ], 200);
     }
 
     public function store()
