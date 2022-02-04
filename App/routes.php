@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Controllers\MedicineController;
+use App\Controllers\UserController;
 use App\Route\Route;
 
 Route::get('/', function () {
@@ -33,10 +34,19 @@ Route::delete('/verb', function () {
     echo $_SERVER['REQUEST_METHOD'];
 });
 
+Route::post('/login', [UserController::class, 'login']);
+
 Route::get('/medicines', [MedicineController::class, 'index']);
 Route::post('/medicines', [MedicineController::class, 'store']);
 Route::get('/medicines/(\w+)/show', [MedicineController::class, 'show']);
 Route::delete('/medicines/(\w+)', [MedicineController::class, 'destroy']);
 Route::post('/medicines/(\w+)', [MedicineController::class, 'update']);
+
+Route::get('/users', [UserController::class, 'index']);
+Route::post('/users', [UserController::class, 'store']);
+Route::get('/users/(\w+)/show', [UserController::class, 'show']);
+Route::delete('/users/(\w+)', [UserController::class, 'destroy']);
+Route::post('/users/(\w+)', [UserController::class, 'update']);
+Route::post('/users/(\w+)/email-verify', [UserController::class, 'emailVerify']);
 
 Route::cleanup();

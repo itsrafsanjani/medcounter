@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Medicine;
 
-class MedicineController
+class MedicineController extends Controller
 {
     private static $instance;
 
@@ -14,19 +14,6 @@ class MedicineController
             self::$instance = new self();
         }
         return self::$instance;
-    }
-
-    public function response($data = [], $status = 400)
-    {
-        if ($status == 200) {
-            $data['message'] = 'Success!';
-        } else if ($status == 201) {
-            $data['message'] = 'Data saved successfully!';
-        } else if ($status == 400) {
-            $data['message'] = 'Validation error!';
-        }
-        http_response_code($status);
-        echo json_encode($data);
     }
 
     public function index()

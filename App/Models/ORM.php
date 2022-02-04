@@ -19,6 +19,11 @@ class ORM
         return $this->db->query('SELECT * FROM ' . $this->tableName)->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function allExceptPassword()
+    {
+        return $this->db->query('SELECT '. 'id, name, email, email_verified_at' .' FROM ' . $this->tableName)->fetch_all(MYSQLI_ASSOC);
+    }
+
     public function save($data)
     {
         $arr_exception = ['NOW()', 'CURDATE()'];
@@ -65,6 +70,11 @@ class ORM
         return $this->db->query('SELECT * FROM ' . $this->tableName . ' WHERE id = ' . $id)->fetch_assoc();
     }
 
+    public function showExceptPassword($id)
+    {
+        return $this->db->query('SELECT '. 'id, name, email, email_verified_at' .' FROM ' . $this->tableName . ' WHERE id = ' . $id)->fetch_assoc();
+    }
+
     public function update($data, $id, $tableId = 'id', $customWhere = NULL)
     {
         $counter = 0;
@@ -100,5 +110,27 @@ class ORM
     public function delete($id)
     {
         return $this->db->query('DELETE FROM ' . $this->tableName . ' WHERE id = ' . $id);
+    }
+
+    public function loginAttempt($email, $password)
+    {
+        $email = mysqli_real_escape_string($this->db, $email);
+        $password = mysqli_real_escape_string($this->db, $password);
+
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($this->db,$sql);
+        $data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+        if (!empty($data)) {
+            if (password_verify($password, $data['password'])) {
+                return [
+                    'status' => true,
+                    'user' => $data
+                ];
+            }
+        }
+
+        return false;
+
     }
 }
